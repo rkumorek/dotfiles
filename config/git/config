@@ -1,0 +1,72 @@
+[user]
+	name = rkumorek
+	email = rafal.kumorek@gmail.com
+
+[core]
+        editor = nvim
+	pager = delta
+
+[init]
+    defaultBranch = main
+
+[intaractive]
+    diffFilter = delta --color-only
+
+[merge]
+	tool = vimdiff
+    conflictStyle = zdiff3
+
+[rebase]
+    updateRefs = true
+
+[fetch]
+    prune = true
+
+[alias]
+	st = status
+	lg = log  --oneline --graph --decorate --branches --remotes --tags --all --color
+	lga = log --graph --remotes --tags --decorate --branches --all --pretty=format:'%C(auto)%h%d %s %C(dim normal)(%an, %ad)%C(reset)'
+	lgb = log --graph --pretty=format:'%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s'
+	ci = commit
+	co = checkout
+	subup = submodule update --init --recursive
+
+[delta]
+    navigate = true
+    side-by-side = false
+    commit-style = normal
+    minus-style = syntax
+    minus-emph-style = reverse brightred
+    minus-empty-line-marker-style = syntax
+    plus-style = syntax
+    plus-emph-style = reverse brightgreen
+    plus-empty-line-marker-style = syntax
+    whitespace-error-style = reverse magenta
+    line-numbers = true
+    line-numbers-zero-style = normal
+    line-numbers-plus-style = bold reverse brightgreen
+    line-numbers-minus-style = bold reverse brightred
+    commit-decoration-style = bold normal
+    file-style = bold normal
+    file-decoration-style = none
+    file-modified-label = modified:
+
+#[color]
+#	ui = auto
+#	status = auto
+#	diff = auto
+#	interactive = auto
+#	branch = auto
+
+#[color "branch"]
+#     remote = cyan
+
+#[color "diff"]
+#	meta = yellow
+#	frag = magenta
+#	old = red
+#	new = green
+#	whitespace = red reverse
+
+[rerere]
+	enabled = true
