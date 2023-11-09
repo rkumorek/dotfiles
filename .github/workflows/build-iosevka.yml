@@ -17,16 +17,16 @@ jobs:
           repository: "be5invis/Iosevka"
           path: "iosevka"
          
-      # Add Bun
-      - name: Installing Bun 
-        uses: oven-sh/setup-bun@v1
+      # Add Node
+      - name: Installing Node 
+        uses: actions/setup-node@v3
 
       # Build Iosevka
       - name: Building
         run: |
-          bun add -g ttfautohint
+          npm install -g ttfautohint
           cd ./iosevka
-          bun install
+          npm ci
           cp ../fonts/iosevka/private-build-plans.toml ./
           npm run build -- ttf::iosevka-wider
           rm -rdf ../fonts/iosevka/dist/*
