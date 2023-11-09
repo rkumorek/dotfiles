@@ -1,0 +1,39 @@
+name: "Build font: Iosevka"
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repo
+      - name: Checking out current repo
+        uses: actions/checkout@v4
+
+      # Checkout Iosevka repo
+      - name: Checking out Iosevka repo
+        uses: actions/checkout@v4
+        with:
+          repository: "be5invis/Iosevka"
+          path: "iosevka"
+         
+      # Add Bun
+      - name: Installing Bun 
+        uses: oven-sh/setup-bun@v1
+
+      # Build Iosevka
+      - name: Building
+        run: |
+          bun add -g ttfautohint
+          cd ./iosevka
+          bun install
+          cp ../fonts/iosevka/private-build-plans.toml ./
+          npm run build -- ttf::iosevka-wider
+          rm -rdf ../fonts/iosevka/dist/*
+          cp -r ./dist/iosevka-wider/ttf ../fonts/iosevka/
+
+       # Commit updated font files
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with: 
+          commit_message: "chore(font): compiled latest Iosevka version"
+
