@@ -35,6 +35,8 @@ jobs:
           npm run build -- ttf::iosevka-wider
           rm -rdf ../fonts/iosevka/dist/*
           cp -r ./dist/iosevka-wider/ttf ../fonts/iosevka/
+          cd ../
+          rm -rf ./iosevka
 
        # Commit updated font files
       - uses: stefanzweifel/git-auto-commit-action@v5
