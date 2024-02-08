@@ -25,8 +25,8 @@ if [[ ! -z $(command -v bat) ]]; then
   alias bat="cat"
 fi
 
-alias vi-home="nvim ~/projects/personal/home"
-alias vi-qmk="nvim ~/projects/personal/qmk"
+alias vihome="nvim ~/projects/personal/home"
+alias viqmk="nvim ~/projects/personal/qmk"
 
 # Git completions
 # zstyle ':completion:*:*:git:*' script ~/.git-completion.bash
