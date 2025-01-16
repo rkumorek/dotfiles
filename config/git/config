@@ -22,6 +22,9 @@
 [fetch]
     prune = true
 
+[push]
+    default = current
+
 [alias]
 	st = status
 	lg = log  --oneline --graph --decorate --branches --remotes --tags --all --color
@@ -30,6 +33,7 @@
 	ci = commit
 	co = checkout
 	subup = submodule update --init --recursive
+        wdiff = diff --word-diff
 
 [delta]
     navigate = true
