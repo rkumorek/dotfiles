@@ -1,0 +1,82 @@
+[user]
+	name = rkumorek
+	email = rafal.kumorek@gmail.com
+
+[core]
+	editor = nvim
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[diff]
+	# smarter matching of unchanged lines than the default myers
+	algorithm = histogram
+	# highlight moved blocks differently from added/removed ones
+	colorMoved = default
+
+[merge]
+	tool = nvimdiff
+	conflictStyle = zdiff3
+
+[rebase]
+	updateRefs = true
+	autoStash = true
+	# `rebase -i` moves fixup!/squash! commits under their target automatically
+	autoSquash = true
+
+[rerere]
+	# remember conflict resolutions and replay them on the next rebase/merge
+	enabled = true
+
+[fetch]
+	prune = true
+	# also delete local tags that were deleted on the remote
+	pruneTags = true
+
+[push]
+	default = current
+	# first push of a new branch also sets its upstream (no need for -u)
+	autoSetupRemote = true
+
+[commit]
+	# show the diff below the message in the commit editor
+	verbose = true
+
+[branch]
+	# most recently committed branches first
+	sort = -committerdate
+
+[tag]
+	# sort tags as versions, e.g. v1.10 after v1.9
+	sort = version:refname
+
+[alias]
+	st = status
+	lg = log --graph --oneline --all
+	lga = log --graph --all --pretty=format:'%C(auto)%h%d %s %C(dim normal)(%an, %ad)%C(reset)'
+	lgb = log --graph --pretty=format:'%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%cr)%Creset %C(green)%ce%Creset %s'
+	ci = commit
+	co = checkout
+	subup = submodule update --init --recursive
+	wdiff = diff --word-diff
+
+[delta]
+	navigate = true
+	side-by-side = false
+	commit-style = normal
+	minus-style = syntax
+	minus-emph-style = reverse brightred
+	minus-empty-line-marker-style = syntax
+	plus-style = syntax
+	plus-emph-style = reverse brightgreen
+	plus-empty-line-marker-style = syntax
+	whitespace-error-style = reverse magenta
+	line-numbers = true
+	line-numbers-zero-style = normal
+	line-numbers-plus-style = bold reverse brightgreen
+	line-numbers-minus-style = bold reverse brightred
+	commit-decoration-style = bold normal
+	file-style = bold normal
+	file-decoration-style = none
+	file-modified-label = modified:

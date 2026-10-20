@@ -1,0 +1,11 @@
+# Custom build, see fonts/iosevka/build.fish
+font-family = Iosevka
+
+# default; tmux reuses $TERM so it gets the same terminfo
+term = xterm-ghostty
+# copy the terminfo to ssh hosts, falling back to xterm-256color if that fails
+shell-integration-features = ssh-env,ssh-terminfo
+
+# blur only shows through a translucent background
+background-opacity = 0.9
+background-blur = 20
