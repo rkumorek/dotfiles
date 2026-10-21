@@ -4,6 +4,9 @@
 -- https://github.com/ThePrimeagen/.dotfiles/blob/master/tmux/.tmux.conf
 -- https://github.com/taekwombo/habitat/tree/master/config/nvim
 
+-- Cache compiled Lua modules for faster startup. See `:help vim.loader`
+vim.loader.enable()
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 vim.g.mapleader = ' '
@@ -81,12 +84,40 @@ vim.opt.formatoptions:remove 'o'
 -- Disable backup mode
 vim.opt.backup = false
 
+-- Ask to save instead of failing when quitting with unsaved changes (e.g. `:q`)
+vim.opt.confirm = true
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Diagnostic Config. See `:help vim.diagnostic.Opts`
+vim.diagnostic.config {
+  update_in_insert = false,
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  underline = { severity = { min = vim.diagnostic.severity.WARN } },
+  virtual_text = true, -- Text shows up at the end of the line
+  virtual_lines = false, -- Text shows up underneath the line (toggle with <leader>l)
+  -- Show the diagnostic float when jumping with `[d` / `]d`
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float {
+        bufnr = bufnr,
+        scope = 'cursor',
+        focus = false,
+      }
+    end,
+  },
+}
+
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- Exit terminal mode with a double <Esc> instead of <C-\><C-n>
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Move selected line(s) down
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")

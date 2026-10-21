@@ -23,6 +23,8 @@ packages=(
     bat
     gh
     fnm
+    # nvim-treesitter (main branch) builds parsers with it
+    tree-sitter-cli
     # neovim build deps
     ninja
     cmake
