@@ -20,6 +20,7 @@ packages=(
     tmux
     fish
     git-delta
+    bat
     gh
     fnm
     # neovim build deps
@@ -46,11 +47,19 @@ for cask in "${casks[@]}"; do
 done
 
 printf '\n[!] Setting keyboard layout to Polish Pro (programmer):\n'
-polish_pro='<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>30788</integer><key>KeyboardLayout Name</key><string>Polish Pro</string></dict>'
-defaults write com.apple.HIToolbox AppleEnabledInputSources -array "$polish_pro"
-defaults write com.apple.HIToolbox AppleSelectedInputSources -array "$polish_pro"
-defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID -string "com.apple.keylayout.PolishPro"
-echo "done, log out and back in to apply"
+# writing HIToolbox defaults only takes effect after a re-login, so switch through the
+# Text Input Sources API instead: applies immediately and persists, other layouts get removed
+swift - <<'EOF'
+import Carbon
+func id(_ s: TISInputSource) -> String { Unmanaged<CFString>.fromOpaque(TISGetInputSourceProperty(s, kTISPropertyInputSourceID)).takeUnretainedValue() as String }
+let target = "com.apple.keylayout.PolishPro"
+let src = (TISCreateInputSourceList([kTISPropertyInputSourceID: target] as CFDictionary, true).takeRetainedValue() as! [TISInputSource])[0]
+TISEnableInputSource(src)
+TISSelectInputSource(src)
+let enabled = TISCreateInputSourceList([kTISPropertyInputSourceCategory: kTISCategoryKeyboardInputSource!] as CFDictionary, false).takeRetainedValue() as! [TISInputSource]
+for s in enabled where id(s) != target && id(s).hasPrefix("com.apple.keylayout.") { TISDisableInputSource(s) }
+EOF
+echo "done"
 
 printf '\n[!] Setting key repeat:\n'
 # units of 15ms: 210ms initial delay, 45ms repeat interval

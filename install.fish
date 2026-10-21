@@ -6,7 +6,10 @@ set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME $HOME/.config
 set links \
     ".tmux.conf -> $HOME/.tmux.conf" \
     "config/git -> $XDG_CONFIG_HOME/git" \
+    "config/nvim -> $XDG_CONFIG_HOME/nvim" \
     "config/ghostty -> $XDG_CONFIG_HOME/ghostty" \
+    "config/gh/config.yml -> $XDG_CONFIG_HOME/gh/config.yml" \
+    "config/fish/conf.d/env.fish -> $XDG_CONFIG_HOME/fish/conf.d/env.fish" \
     "config/fish/conf.d/brew.fish -> $XDG_CONFIG_HOME/fish/conf.d/brew.fish" \
     "config/fish/conf.d/fnm.fish -> $XDG_CONFIG_HOME/fish/conf.d/fnm.fish"
 

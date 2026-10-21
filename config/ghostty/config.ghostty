@@ -9,3 +9,11 @@ shell-integration-features = ssh-env,ssh-terminfo
 # blur only shows through a translucent background
 background-opacity = 0.9
 background-blur = 20
+
+# tabs live in the titlebar instead of a separate tab bar
+macos-titlebar-style = tabs
+
+window-padding-x = 8
+window-padding-y = 0
+# fill the padding with the nearest cell's background so full-width bars (tmux status) reach the edge
+window-padding-color = extend
