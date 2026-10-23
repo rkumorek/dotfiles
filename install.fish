@@ -11,7 +11,9 @@ set links \
     "config/gh/config.yml -> $XDG_CONFIG_HOME/gh/config.yml" \
     "config/fish/conf.d/env.fish -> $XDG_CONFIG_HOME/fish/conf.d/env.fish" \
     "config/fish/conf.d/brew.fish -> $XDG_CONFIG_HOME/fish/conf.d/brew.fish" \
-    "config/fish/conf.d/fnm.fish -> $XDG_CONFIG_HOME/fish/conf.d/fnm.fish"
+    "config/fish/conf.d/fnm.fish -> $XDG_CONFIG_HOME/fish/conf.d/fnm.fish" \
+    "config/fish/fish_plugins -> $XDG_CONFIG_HOME/fish/fish_plugins" \
+    "config/claude/CLAUDE.md -> $HOME/.claude/CLAUDE.md"
 
 set dir (realpath (dirname (status -f)))
 
@@ -63,6 +65,14 @@ if test "$(dscl . -read /Users/$USER UserShell | string split -f2 ' ')" != $fish
     chsh -s $fish_path
 else
     echo "fish already default shell"
+end
+
+printf '\n[!] Installing fish plugins:\n'
+if not type -q fisher
+    echo "[skip] fisher not installed, run setup-mac.sh first"
+else
+    # installs/removes plugins to match fish_plugins
+    fisher update
 end
 
 printf '\n[!] Installing node LTS:\n'

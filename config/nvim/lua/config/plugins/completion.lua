@@ -3,12 +3,6 @@ return {
     'saghen/blink.cmp',
     dependencies = {
       'rafamadriz/friendly-snippets',
-      -- {
-      --   'supermaven-inc/supermaven-nvim',
-      --   config = function()
-      --     require('supermaven-nvim').setup {}
-      --   end,
-      -- },
     },
 
     version = '1.*',

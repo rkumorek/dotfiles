@@ -19,10 +19,13 @@ printf '\n[!] Installing packages:\n'
 packages=(
     tmux
     fish
+    fisher
     git-delta
     bat
     gh
     fnm
+    pnpm
+    ripgrep
     # nvim-treesitter (main branch) builds parsers with it
     tree-sitter-cli
     # neovim build deps
@@ -36,8 +39,11 @@ printf '\n[!] Installing apps:\n'
 casks=(
     ghostty
     google-chrome
+    google-chrome@dev
     microsoft-teams
     microsoft-outlook
+    microsoft-excel
+    microsoft-word
 )
 for cask in "${casks[@]}"; do
     if brew list --cask "$cask" >/dev/null 2>&1; then
